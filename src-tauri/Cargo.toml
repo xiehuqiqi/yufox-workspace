@@ -1,0 +1,53 @@
+[package]
+name = "yufox_workspace"
+version = "0.1.0-beta.0"
+description = "A Minecraft workspace, integrated with a large number of tools, from development to play, from fantasy to realization, from this moment on, dreams have no limits."
+authors = ["github.com@xiehuqiqi & bilibili.com@湖边钓鱼的狐"]
+license = "Apache-2.0"
+repository = "https://github.com/xiehuqiqi/yufoxworkspace/"
+edition = "2021"
+rust-version = "1.77.2"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "yufox_workspace_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.0.2", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2.1.0", features = ["tray-icon"]  }
+tauri-plugin-log = "2"
+tauri-plugin-clipboard-manager = "2.2.0"
+tauri-plugin-deep-link = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-http = "2"
+tauri-plugin-notification = "2"
+tauri-plugin-os = "2"
+tauri-plugin-persisted-scope = "2"
+tauri-plugin-process = "2"
+tauri-plugin-shell = "2"
+tauri-plugin-stronghold = "2"
+tauri-plugin-upload = "2"
+# https://github.com/HuakunShen/tauri-plugin-network
+tauri-plugin-network = "2.0.4"
+# https://github.com/ayangweb/tauri-plugin-fs-pro
+tauri-plugin-fs-pro = "2.3.0"
+# https://github.com/HuakunShen/tauri-plugin-system-info
+tauri-plugin-system-info = "2.0.8"
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-global-shortcut = "2"
+# single-instance not ts-api
+tauri-plugin-single-instance = { version = "2.0.0", features = ["deep-link"] }
+tauri-plugin-updater = "2"
+tauri-plugin-window-state = "2"
